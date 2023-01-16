@@ -7,7 +7,8 @@ import {v1} from "uuid";
 type FilterValuesType = 'all' | 'active' | 'completed'
 
 function App() {
-    console.log(v1())
+
+
     const todoListTitle_1: string = 'What to learn';
     const [tasks, setTasks] = useState<Array<TaskType>>([
         {id: v1(), title: 'HTML', isDone: true},

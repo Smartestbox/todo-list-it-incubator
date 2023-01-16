@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 
 type TodoListPropsType = {
     title: string
@@ -15,7 +15,8 @@ export type TaskType = {
 }
 
 const TodoList = (props: TodoListPropsType) => {
-
+    const [title, setTitle] = useState<string>('')
+    console.log(title)
     let tasksList = props.tasks.length
         ? props.tasks.map((task: TaskType, index) => {
             const removeTask = () => props.removeTask(task.id)
@@ -29,25 +30,41 @@ const TodoList = (props: TodoListPropsType) => {
         })
         : <span>Your taskslist is empty</span>
 
+    const addTask = () => {
+        props.addTask(title);
+        setTitle('')
+    }
+
+    const onChangeHadler = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
+    const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && addTask()
+    const onClickAllHandler = () => props.changeFilter('all')
+    const onClickActiveHandler = () => props.changeFilter('active')
+    const onClickCompletedHandler = () => props.changeFilter('completed')
+
+
     // React под капотом автоматически отрисовывает Array как список элементов
     return (
         <div>
             <h3>{props.title}</h3>
             <div>
-                <input/>
-                <button onClick={()=>props.addTask('New task')}>+</button>
+                <input
+                    type='text'
+                    value={title}
+                    onChange={onChangeHadler}
+                    onKeyDown={onKeyDownHandler}
+                />
+                <button onClick={addTask}>+</button>
             </div>
             <ul>
                 {tasksList}
             </ul>
             <div>
-                <button onClick={() => props.changeFilter('all')}>All</button>
-                <button onClick={() => props.changeFilter('active')}>Active</button>
-                <button onClick={() => props.changeFilter('completed')}>Completed</button>
+                <button onClick={onClickAllHandler}>All</button>
+                <button onClick={onClickActiveHandler}>Active</button>
+                <button onClick={onClickCompletedHandler}>Completed</button>
             </div>
         </div>
-
-    );
-};
+    )
+}
 
 export default TodoList;
