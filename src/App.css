@@ -6,3 +6,18 @@
 .App > div {
   margin-right: 50px;
 }
+
+.task-done {
+  text-decoration: line-through;
+}
+
+.btn-active {
+  color: white;
+  background-color: hotpink;
+  border: 2px solid hotpink;
+  border-radius: 5px;
+}
+
+.input-error {
+  border: 3px solid red;
+}

@@ -4,7 +4,7 @@ import TodoList from './TodoList';
 import {TaskType} from './TodoList';
 import {v1} from "uuid";
 
-type FilterValuesType = 'all' | 'active' | 'completed'
+export type FilterValuesType = 'all' | 'active' | 'completed'
 
 function App() {
 
@@ -40,6 +40,9 @@ function App() {
     const changeFilter = (filter: FilterValuesType) => {
         setFilter(filter)
     }
+    const changeTaskStatus = (taskId: string, isDone: boolean) => {
+        setTasks(tasks.map((t) => t.id === taskId ? {...t, isDone: isDone} : t))
+    }
 
     const getFilteredTaskForRender =
         (tasks: Array<TaskType>, filter: FilterValuesType): Array<TaskType> => {
@@ -63,6 +66,8 @@ function App() {
                 removeTask={removeTask}
                 changeFilter={changeFilter}
                 addTask={addTask}
+                changeTaskStatus={changeTaskStatus}
+                filter={filter}
             />
             {/* <TodoList title={todoListTitle_2}/> */}
         </div>
