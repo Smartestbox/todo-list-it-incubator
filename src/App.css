@@ -21,3 +21,9 @@
 .input-error {
   border: 3px solid red;
 }
+
+.addItemForm {
+  border: 2px solid hotpink;
+  border-radius: 5px;
+  padding: 10px;
+}
