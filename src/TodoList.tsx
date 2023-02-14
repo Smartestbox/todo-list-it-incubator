@@ -3,6 +3,9 @@ import {FilterValuesType} from "./App";
 import './App.css';
 import AddItemForm from "./AddItemForm";
 import EtitableSpan from "./EtitableSpan";
+import {Button, Checkbox, IconButton, List, Typography} from "@mui/material";
+import {DeleteForeverRounded} from "@mui/icons-material";
+
 
 type TodoListPropsType = {
     todoListId: string
@@ -32,10 +35,19 @@ const TodoList = (props: TodoListPropsType) => {
             const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeTaskStatus(task.id, e.currentTarget.checked, props.todoListId)
             const taskClass = task.isDone ? 'task-done' : ''
             return (
-                <li key={index} className={taskClass}>
-                    <input onChange={changeTaskStatus} type="checkbox" checked={task.isDone}/>
-                    <EtitableSpan  title={task.title} changeTitle={changeTaskTitle}/>
-                    <button onClick={removeTask}>x</button>
+                <li key={index} className={'task-list-item'}>
+                    <div className={taskClass}>
+                        <Checkbox
+                            size='small'
+                            onChange={changeTaskStatus}
+                            checked={task.isDone}
+
+                        />
+                        <EtitableSpan  title={task.title} changeTitle={changeTaskTitle}/>
+                    </div>
+                    <IconButton onClick={removeTask} size='small'>
+                        <DeleteForeverRounded />
+                    </IconButton>
                 </li>
             )
         })
@@ -52,30 +64,47 @@ const TodoList = (props: TodoListPropsType) => {
 
     return (
         <div>
-            <h3>
+            <Typography align='center' variant='h5' sx={{fontWeight: 'bold'}}>
                 <EtitableSpan title={props.title} changeTitle={changeTodoListTitle} />
-                <button onClick={removeTodoList}>x</button>
-            </h3>
+                <IconButton onClick={removeTodoList} size='small'>
+                    <DeleteForeverRounded />
+                </IconButton>
+            </Typography>
             <AddItemForm addItem={addTask}/>
-            <ul>
+            <List className='tasks-list'>
                 {tasksList}
-            </ul>
+            </List>
             <div>
-                <button
-                    className={props.filter === 'all' ? 'btn-active' : ''} onClick={onClickAllHandler}
+                <Button
+                    sx={{marginRight: '10px'}}
+                    size='small'
+                    variant='contained'
+                    color={props.filter === 'all' ? 'secondary' : 'primary'}
+                    disableElevation
+                    onClick={onClickAllHandler}
+
                 >
                     All
-                </button>
-                <button
-                    className={props.filter === 'active' ? 'btn-active' : ''} onClick={onClickActiveHandler}
+                </Button>
+                <Button
+                    sx={{marginRight: '10px'}}
+                    size='small'
+                    variant='contained'
+                    color={props.filter === 'active' ? 'secondary' : 'primary'}
+                    disableElevation
+                    onClick={onClickActiveHandler}
                 >
                     Active
-                </button>
-                <button
-                    className={props.filter === 'completed' ? 'btn-active' : ''} onClick={onClickCompletedHandler}
+                </Button>
+                <Button
+                    size='small'
+                    variant='contained'
+                    color={props.filter === 'completed' ? 'secondary' : 'primary'}
+                    disableElevation
+                    onClick={onClickCompletedHandler}
                 >
                     Completed
-                </button>
+                </Button>
             </div>
         </div>
     )

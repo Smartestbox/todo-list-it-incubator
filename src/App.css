@@ -1,14 +1,7 @@
-.App {
-  padding: 30px;
-  display: flex;
-}
-
-.App > div {
-  margin-right: 50px;
-}
 
 .task-done {
   text-decoration: line-through;
+  opacity: 50%;
 }
 
 .btn-active {
@@ -23,7 +16,18 @@
 }
 
 .addItemForm {
+  display: flex;
+  flex-direction: row;
   border: 2px solid hotpink;
   border-radius: 5px;
   padding: 10px;
+}
+
+.task-list-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tasks-list {
+  padding: 0;
 }
