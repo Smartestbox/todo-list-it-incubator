@@ -9,7 +9,7 @@ import {Menu} from "@mui/icons-material";
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 
-type TodoListType = {
+export type TodoListType = {
     id: string
     title: string
     filter: FilterValuesType
@@ -89,10 +89,10 @@ function App() {
     const getFilteredTaskForRender =
         (tasks: Array<TaskType>, filter: FilterValuesType): Array<TaskType> => {
             if (filter === 'active') {
-                return tasks.filter(task => task.isDone === false)
+                return tasks.filter(task => !task.isDone)
             }
             if (filter === 'completed') {
-                return tasks.filter(task => task.isDone === true)
+                return tasks.filter(task => task.isDone)
             } else {
                 return tasks
             }
@@ -155,6 +155,6 @@ function App() {
             </Container>
         </div>
     );
-};
+}
 
 export default App;
