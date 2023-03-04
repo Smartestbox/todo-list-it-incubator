@@ -41,7 +41,6 @@ const TodoList = (props: TodoListPropsType) => {
                             size='small'
                             onChange={changeTaskStatus}
                             checked={task.isDone}
-
                         />
                         <EtitableSpan  title={task.title} changeTitle={changeTaskTitle}/>
                     </div>

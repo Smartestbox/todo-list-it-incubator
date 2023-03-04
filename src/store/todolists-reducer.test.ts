@@ -5,7 +5,7 @@ import {
     AddTodolistActionCreator, ChangeTodolistFilterActionCreator, ChangeTodolistTitleActionCreator,
     RemoveTodolistActionCreator,
     todolistsReducer
-} from "./todolists-reducers";
+} from "./todolists-reducer";
 
 test('correct todolist should be removed', () => {
     //тестовые данные

@@ -15,14 +15,13 @@ export type TodoListType = {
     filter: FilterValuesType
 }
 
-type TasksStateType = {
+export type TasksStateType = {
     [todoListId: string]: Array<TaskType>
 }
 
 function App() {
     const todoListId_1 = v1()
     const todoListId_2 = v1()
-
 
     const [todoLists, setTodoLists] = useState<Array<TodoListType>>([
         {id: todoListId_1, title: 'What to learn', filter: 'all'},
@@ -79,12 +78,14 @@ function App() {
         setTasks({...tasks, [todoListId]: [...tasks[todoListId], newTask]})
     }
     const changeTaskStatus = (taskId: string, isDone: boolean, todoListId: string) => {
-
-        setTasks({...tasks, [todoListId]: tasks[todoListId].map((t) => t.id === taskId ? {...t, isDone: isDone} : t)})
+        setTasks({...tasks, [todoListId]: tasks[todoListId].map((t) =>
+                t.id === taskId ? {...t, isDone: isDone} : t)}
+        )
     }
     const changeTaskTitle = (taskId: string, title: string, todoListId: string) => {
-
-        setTasks({...tasks, [todoListId]: tasks[todoListId].map((t) => t.id === taskId ? {...t, title: title} : t)})
+        setTasks({...tasks, [todoListId]: tasks[todoListId].map((t) =>
+                t.id === taskId ? {...t, title: title} : t)}
+        )
     }
     const getFilteredTaskForRender =
         (tasks: Array<TaskType>, filter: FilterValuesType): Array<TaskType> => {
